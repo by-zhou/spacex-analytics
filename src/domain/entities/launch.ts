@@ -16,4 +16,5 @@ export interface Launch {
   crew: string[];
   capsules: string[];
   payloads: string[];
+  launchpad: string | null;
 }

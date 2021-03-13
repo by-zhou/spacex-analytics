@@ -38,4 +38,4 @@ export const getPayload: GetPayload = async (id: string) => {
       return response.json() as Promise<PayloadDto>;
     })
     .then(mapPayload);
-}
+};

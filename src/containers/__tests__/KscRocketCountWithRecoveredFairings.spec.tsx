@@ -2,7 +2,7 @@ import { render, screen, waitForElementToBeRemoved } from "@testing-library/reac
 import React from 'react';
 
 import { ERROR_MESSAGE, LOADING_MESSAGE } from '../messages';
-import { SuccessfulLaunchCount } from '../SuccessfulLaunchCount';
+import { KscRocketCountWithRecoveredFairings } from '../KscRocketCountWithRecoveredFairings';
 import { useUsecases } from '../../useUsecases';
 
 jest.mock('../../useUsecases', () => ({
@@ -13,24 +13,24 @@ export const mockUsecases = (usecases: Partial<ReturnType<typeof useUsecases>>) 
   (useUsecases as jest.Mock<Partial<ReturnType<typeof useUsecases>>>).mockImplementation(() => usecases)
 };
 
-describe('<SuccessfulLaunchCount />', () => {
+describe('<KscRocketCountWithRecoveredFairings />', () => {
   it('should first render loading message and then the count', async () => {
     mockUsecases({
-      getSuccessfulLaunchCount: () => Promise.resolve({ successCount: 3, totalCount: 5 }),
+      getKscRocketCountWithRecoveredFairings: () => Promise.resolve(2),
     });
-    render(<SuccessfulLaunchCount />);
+    render(<KscRocketCountWithRecoveredFairings />);
     expect(screen.getByText(LOADING_MESSAGE)).toBeInTheDocument();
 
     await waitForElementToBeRemoved(() => screen.queryByText(LOADING_MESSAGE));
 
-    expect(screen.getByText(/: 3 of 5/)).toBeInTheDocument();
+    expect(screen.getByText(/: 2/)).toBeInTheDocument();
   });
 
   it('should render error message', async () => {
     mockUsecases({
-      getSuccessfulLaunchCount: () => Promise.reject(new Error()),
+      getKscRocketCountWithRecoveredFairings: () => Promise.reject(new Error()),
     });
-    render(<SuccessfulLaunchCount />);
+    render(<KscRocketCountWithRecoveredFairings />);
     await waitForElementToBeRemoved(() => screen.queryByText(LOADING_MESSAGE));
 
     expect(screen.getByText(ERROR_MESSAGE)).toBeInTheDocument();

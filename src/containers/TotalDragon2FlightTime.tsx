@@ -4,9 +4,9 @@ import { useLoadData } from './useLoadData';
 import { useUsecases } from '../useUsecases';
 import { ERROR_MESSAGE, LOADING_MESSAGE } from './messages';
 
-export const SuccessfulLaunchCount = () => {
-  const { getSuccessfulLaunchCount } = useUsecases();
-  const { loading, data, error } = useLoadData(getSuccessfulLaunchCount);
+export const TotalDragon2FlightTime = () => {
+  const { getTotalDragon2FlightTime } = useUsecases();
+  const { loading, data, error } = useLoadData(getTotalDragon2FlightTime);
 
   if (loading) {
     return <>{LOADING_MESSAGE}</>;
@@ -16,5 +16,5 @@ export const SuccessfulLaunchCount = () => {
     return <>{ERROR_MESSAGE}</>;
   }
 
-  return <>Number of successful launches: {data?.successCount} of {data?.totalCount}</>;
+  return <>Total flight time for all launched Dragon 2.0: {data} sec</>;
 };

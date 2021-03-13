@@ -12,7 +12,10 @@ describe('getSuccessfulLaunchCountFactory', () => {
         mockLaunch(),
         mockLaunch(),
       ]));
-      await expect(getSuccessfulLaunchCount()).resolves.toEqual(2);
+      await expect(getSuccessfulLaunchCount()).resolves.toEqual({
+        successCount: 2,
+        totalCount: 3,
+      });
     });
 
     it('should throw error if fetching fails', async () => {

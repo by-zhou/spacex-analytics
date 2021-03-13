@@ -1,6 +1,6 @@
 import { SPACEX_BASE_URL } from './spacexConfig';
 import { Launch } from '../domain/entities/launch';
-import { GetPastLaunches } from '../domain/entities/launchRepository';
+import { GetPastLaunches, GetUpcomingLaunches } from '../domain/entities/launchRepository';
 
 export interface LaunchDto {
   id: string;
@@ -20,6 +20,7 @@ export interface LaunchDto {
   crew: string[];
   capsules: string[];
   payloads: string[];
+  launchpad: string | null;
 
   // Rest of the fields are ignored
 }
@@ -42,10 +43,19 @@ const mapLaunch = (launchDto: LaunchDto): Launch => ({
   crew: launchDto.crew,
     capsules: launchDto.capsules,
   payloads: launchDto.payloads,
+  launchpad: launchDto.launchpad,
 });
 
 export const getPastLaunches: GetPastLaunches = async () => {
   return fetch(`${SPACEX_BASE_URL}/launches/past`)
+    .then(response => {
+      return response.json() as Promise<LaunchDto[]>;
+    })
+    .then(launchDtos => launchDtos.map(mapLaunch));
+};
+
+export const getUpcomingLaunches: GetUpcomingLaunches = async () => {
+  return fetch(`${SPACEX_BASE_URL}/launches/upcoming`)
     .then(response => {
       return response.json() as Promise<LaunchDto[]>;
     })

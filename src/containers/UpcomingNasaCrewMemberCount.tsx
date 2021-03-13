@@ -4,9 +4,9 @@ import { useLoadData } from './useLoadData';
 import { useUsecases } from '../useUsecases';
 import { ERROR_MESSAGE, LOADING_MESSAGE } from './messages';
 
-export const SuccessfulLaunchCount = () => {
-  const { getSuccessfulLaunchCount } = useUsecases();
-  const { loading, data, error } = useLoadData(getSuccessfulLaunchCount);
+export const UpcomingNasaCrewMemberCount = () => {
+  const { getUpcomingNasaCrewMemberCount } = useUsecases();
+  const { loading, data, error } = useLoadData(getUpcomingNasaCrewMemberCount);
 
   if (loading) {
     return <>{LOADING_MESSAGE}</>;
@@ -16,5 +16,5 @@ export const SuccessfulLaunchCount = () => {
     return <>{ERROR_MESSAGE}</>;
   }
 
-  return <>Number of successful launches: {data?.successCount} of {data?.totalCount}</>;
+  return <>Number of NASA crew member to be in the upcoming launches: {data}</>;
 };

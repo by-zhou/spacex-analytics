@@ -2,7 +2,7 @@ import { render, screen, waitForElementToBeRemoved } from "@testing-library/reac
 import React from 'react';
 
 import { ERROR_MESSAGE, LOADING_MESSAGE } from '../messages';
-import { TotalDragonFlightTime } from '../TotalDragonFlightTime';
+import { TotalDragon2FlightTime } from '../TotalDragon2FlightTime';
 import { useUsecases } from '../../useUsecases';
 
 jest.mock('../../useUsecases', () => ({
@@ -13,12 +13,12 @@ export const mockUsecases = (usecases: Partial<ReturnType<typeof useUsecases>>) 
   (useUsecases as jest.Mock<Partial<ReturnType<typeof useUsecases>>>).mockImplementation(() => usecases)
 };
 
-describe('<TotalDragonFlightTime />', () => {
+describe('<TotalDragon2FlightTime />', () => {
   it('should first render loading message and then the time', async () => {
     mockUsecases({
-      getTotalDragonFlightTime: () => Promise.resolve(4567),
+      getTotalDragon2FlightTime: () => Promise.resolve(4567),
     });
-    render(<TotalDragonFlightTime />);
+    render(<TotalDragon2FlightTime />);
     expect(screen.getByText(LOADING_MESSAGE)).toBeInTheDocument();
 
     await waitForElementToBeRemoved(() => screen.queryByText(LOADING_MESSAGE));
@@ -28,9 +28,9 @@ describe('<TotalDragonFlightTime />', () => {
 
   it('should render error message', async () => {
     mockUsecases({
-      getTotalDragonFlightTime: () => Promise.reject(new Error()),
+      getTotalDragon2FlightTime: () => Promise.reject(new Error()),
     });
-    render(<TotalDragonFlightTime />);
+    render(<TotalDragon2FlightTime />);
     await waitForElementToBeRemoved(() => screen.queryByText(LOADING_MESSAGE));
 
     expect(screen.getByText(ERROR_MESSAGE)).toBeInTheDocument();
