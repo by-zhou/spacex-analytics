@@ -1,6 +1,14 @@
 # SpaceX Analytics
 
-This single page application shows some insights of past and upcoming SpaceX flights.
+This single page application shows some insights of past and upcoming SpaceX flights by processing data from the [SpaceX API](https://github.com/r-spacex/SpaceX-API/tree/master/docs/v4).
+
+(number of successful launches in the past, total flight time for all launched Dragon 2.0,
+ number of rockets launched from Kennedy Space Center Historic Launch Complex 39A with recovered fairings,
+  number of NASA crew members to be in the upcoming launches)
+
+This app is accessible from the following GitHub Page: <br/>
+[http://pychoude.github.io/spacex-analytics](http://pychoude.github.io/spacex-analytics) <br/>
+Deployment is automated by GitHub Actions. Each commit triggers an update to the page above.
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -25,13 +33,14 @@ These modules are hence distributed to folders according to their layers and org
     ├── public                  # Static public files (index.html and assets)
     ├── src                     # Source files
     │   ├── containers          # React components used in the presentation layer
-    │   │   ├── __tests__       # Unit tests for the React components
     │   │   └── testing         # Test utilities for components
     │   ├── domain              # All modules in the domain layer
     │   │   ├── entities        # Domain models and repository interfaces
     │   │   └── usecases        # Use cases to process domain entities with business logic
     │   └── intrastructure      # Repository implementation in data layer
     └── README.md
+
+In addition to the folders above, all of them could have a child folder `__tests__` containing unit or integration tests.
 
 ## Available Scripts
 
@@ -50,6 +59,10 @@ Launches the test runner in the interactive watch mode.\
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
+
+### `npm run deploy`
+
+Deploys the app manually the GitHub Page configured as `homepage` is `package.json`.
 
 ### `npm run eject`
 
